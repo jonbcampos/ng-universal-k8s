@@ -8,4 +8,3 @@ RUN npm install --unsafe-perm || \
 EXPOSE 4000
 RUN npm run build:ssr
 CMD npm run serve:ssr
-USER node

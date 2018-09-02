@@ -1,28 +1,14 @@
-# Getting Started With Schematics
+# ngUniversalK8s
 
-This repository is a basic Schematic implementation that serves as a starting point to create and publish Schematics to NPM.
+Angular Universal is great, but... there is just a little that can and should be done to make it nicer for Kubernetes. 
 
-### Testing
+Honestly, the additions are minor but the changes would be helpful for any project so that you can Containerize your server and have the appropriate services.
 
-To test locally, install `@angular-devkit/schematics` globally and use the `schematics` command line tool. That tool acts the same as the `generate` command of the Angular CLI, but also has a debug mode.
-
-Check the documentation with
+## Getting Started
+For the initial scaffolding (required before anything else cause it sets everything where it needs to be).
 ```bash
-schematics --help
-```
-
-### Unit Testing
-
-`npm run test` will run the unit tests, using Jasmine as a runner and test framework.
-
-### Publishing
-
-To publish, simply do:
-
-```bash
-npm run build
-npm publish
-```
-
-That's it!
- 
+cd to/wherever/you/are/putting/your/project
+ng new my-project
+cd my-project/
+ng g angular:universal
+ng add ng-universal-k8s
