@@ -1,6 +1,6 @@
 {
   "name": "ng-universal-k8s",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Angular schematic to add Kubernetes functionality to Angular Universal",
   "scripts": {
     "build": "tsc -p tsconfig.json",
