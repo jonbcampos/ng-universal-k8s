@@ -10,5 +10,8 @@ For the initial scaffolding (required before anything else cause it sets everyth
 cd to/wherever/you/are/putting/your/project
 ng new my-project
 cd my-project/
-ng g angular:universal
 ng add ng-universal-k8s
+```
+
+## Note
+Did you already go through the [Angular Universal setup steps on your own from the Angular Site](https://angular.io/guide/universal)? That's great! You can still run this.
