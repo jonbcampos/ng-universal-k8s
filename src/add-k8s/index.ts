@@ -51,7 +51,7 @@ function updateServer(projectRoot:Path){
             if (node.getText().indexOf('\'*.*\'') > -1) {
                 const start = node.pos;
                 recorder.insertLeft(start, new Buffer(content));
-
+                found = true;
             }
         });
         if(!found){
