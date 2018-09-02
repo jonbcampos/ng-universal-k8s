@@ -6,7 +6,6 @@ import { enableProdMode } from '@angular/core';
 
 import * as express from 'express';
 import { join } from 'path';
-import * as healthCheck from 'express-healthcheck';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();

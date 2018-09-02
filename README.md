@@ -2,7 +2,9 @@
 
 Angular Universal is great, but... there is just a little that can and should be done to make it nicer for Kubernetes. 
 
-Honestly, the additions are minor but the changes would be helpful for any project so that you can Containerize your server and have the appropriate services.
+Honestly, the additions in this package are minor but the changes would be helpful for any project so that you can Containerize your server and have the appropriate services.
+
+I call the Angular Universal Schematic kept up by the Angular team and then I overlay the outputted `server.ts` with a health check and a readiness check. Like I said, minor updates. 
 
 ## Getting Started
 For the initial scaffolding (required before anything else cause it sets everything where it needs to be).

@@ -31,6 +31,8 @@ function updateServer(projectRoot:Path){
         // TODO add check if it already exists
         const content = '\n' +
             '\n' +
+            'import * as healthCheck from \'express-healthcheck\';\n' +
+            '\n' +
             '// add healthcheck\n' +
             'app.use(\'/healthcheck\', healthCheck());\n' +
             '\n' +
