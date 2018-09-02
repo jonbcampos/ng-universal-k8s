@@ -1,0 +1,34 @@
+{
+  "name": "ng-universal-k8s",
+  "version": "0.0.1",
+  "description": "Angular schematic to add Kubernetes functionality to Angular Universal",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && jasmine src/**/*_spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonbcampos/ng-universal-k8s"
+  },
+  "keywords": [
+    "schematics",
+    "kubernetes",
+    "universal-k8s",
+    "k8s",
+    "universal",
+    "angular"
+  ],
+  "author": "Jonathan Campos <jonbcampos@gmail.com>",
+  "license": "Apache-2.0",
+  "schematics": "./src/collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^0.7.3",
+    "@angular-devkit/schematics": "^0.7.3",
+    "@angular/cli": "^6.1.5",
+    "@types/jasmine": "^2.6.0",
+    "@types/node": "^8.0.31",
+    "jasmine": "^2.8.0",
+    "sinon": "^6.1.5",
+    "typescript": "^2.7.2"
+  }
+}

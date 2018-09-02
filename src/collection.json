@@ -1,0 +1,16 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-universal-k8s": {
+      "description": "A schematic to add k8s functionality to Angular Universal.",
+      "factory": "./ng-universal-k8s/index#ngUniversalK8s",
+      "schema": "./ng-universal-k8s/schema.json"
+    },
+    "add-k8s": {
+      "description": "A schematic to add k8s functionality to Angular Universal if it already exists.",
+      "factory": "./add-k8s/index#addK8s",
+      "schema": "./add-k8s/schema.json",
+      "private": true
+    }
+  }
+}
