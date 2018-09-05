@@ -26,9 +26,17 @@ function addToPackage() {
             name: 'webpack-cli',
             version: '^3.1.0'
         }, {
+            type: NodeDependencyType.Dev,
+            name: 'webpack',
+            version: '^4.x.x'
+        }, {
             type: NodeDependencyType.Default,
             name: '@nguniversal/express-engine',
             version: '^6.1.0'
+        }, {
+            type: NodeDependencyType.Default,
+            name: '@nguniversal/express',
+            version: '^4.15.2'
         }, {
             type: NodeDependencyType.Default,
             name: '@nguniversal/module-map-ngfactory-loader',
