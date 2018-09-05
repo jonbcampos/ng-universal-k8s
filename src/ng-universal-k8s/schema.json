@@ -10,6 +10,16 @@
             "$default": {
                 "$source": "projectName"
             }
+        },
+        "includeLogging": {
+            "type": "boolean",
+            "description": "Flag to include logging support.",
+            "default": true
+        },
+        "containerPort": {
+            "type": "string",
+            "description": "Port to expose for the container.",
+            "default": "4000"
         }
     },
     "additionalProperties": true

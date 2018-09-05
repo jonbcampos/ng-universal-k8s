@@ -13,6 +13,7 @@ import {Path} from "@angular-devkit/core";
 import {getWorkspace} from '@schematics/angular/utility/config';
 import * as strings from "../../node_modules/@angular-devkit/core/src/utils/strings";
 import {addPackageJsonDependency, NodeDependencyType} from "../utils/dependencies";
+import {readValueFromPackageJson} from "../utils/json-editor";
 
 function addToPackage() {
     return (tree: Tree) => {
@@ -20,6 +21,26 @@ function addToPackage() {
             type: NodeDependencyType.Default,
             name: 'domino',
             version: '^2.1.0'
+        }, {
+            type: NodeDependencyType.Dev,
+            name: 'webpack-cli',
+            version: '^3.1.0'
+        }, {
+            type: NodeDependencyType.Default,
+            name: '@nguniversal/express-engine',
+            version: '^6.1.0'
+        }, {
+            type: NodeDependencyType.Default,
+            name: '@nguniversal/module-map-ngfactory-loader',
+            version: '^6.1.0'
+        }, {
+            type: NodeDependencyType.Default,
+            name: 'ts-loader',
+            version: '^5.0.0'
+        }, {
+            type: NodeDependencyType.Default,
+            name: 'nconf',
+            version: '^0.10.0'
         }].forEach(dependency => addPackageJsonDependency(tree, dependency));
         return tree;
     }
@@ -41,9 +62,11 @@ export function ngUniversalK8s(options: any): Rule {
             throw new SchematicsException(`ng-universal-k8s requires a project type of "application".`);
         }
         const projectRoot = project.root as Path;
+        const projectName = readValueFromPackageJson(tree, 'name').value;
 
         const templateOptions = {
             ...strings,
+            projectName,
             ...options,
         };
 
@@ -63,6 +86,10 @@ export function ngUniversalK8s(options: any): Rule {
             ]), MergeStrategy.Default),
             hasServer ? noop() : addToPackage(),
             schematic('add-k8s', {
+                project: options.project,
+                containerPort: options.containerPort
+            }),
+            !options.includeLogging ? noop() : schematic('add-logging', {
                 project: options.project
             })
         ]);

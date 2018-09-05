@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema",
-    "id": "add-k8s",
-    "title": "A schematic to add k8s functionality to Angular Universal if it already exists.",
+    "id": "add-logging",
+    "title": "A schematic to add k8s logging functionality to Angular Universal if it already exists.",
     "type": "object",
     "properties": {
         "project": {
@@ -10,11 +10,6 @@
             "$default": {
                 "$source": "projectName"
             }
-        },
-        "containerPort": {
-            "type": "string",
-            "description": "Port to expose for the container.",
-            "default": "4000"
         }
     },
     "additionalProperties": true

@@ -70,7 +70,11 @@ describe('ng-universal-k8s', () => {
                 expect(tree.readContent('/projects/bar/server.ts')
                     .indexOf('SIGTERM'))
                     .toBeGreaterThanOrEqual(0);
-
+                    
+                expect(tree.readContent('/projects/bar/server.ts')
+                    .indexOf('import {createLogger, format, transports} from \'winston\';'))
+                    .toBeGreaterThanOrEqual(0);
+                    
                 expect(tree.files).toEqual([
                     '/README.md',
                     '/angular.json',
@@ -85,7 +89,9 @@ describe('ng-universal-k8s', () => {
                     '/projects/bar/tsconfig.spec.json',
                     '/projects/bar/tslint.json',
                     '/projects/bar/tsconfig.server.json',
+                    '/projects/bar/config.js',
                     '/projects/bar/server.ts',
+                    '/projects/bar/webpack.server.config.js',
                     '/projects/bar/Dockerfile',
                     '/projects/bar/src/favicon.ico',
                     '/projects/bar/src/index.html',
@@ -103,6 +109,8 @@ describe('ng-universal-k8s', () => {
                     '/projects/bar/src/app/app.component.spec.ts',
                     '/projects/bar/src/app/app.component.ts',
                     '/projects/bar/src/app/app.server.module.ts',
+                    '/projects/bar/k8s/deployment.yaml',
+                    '/projects/bar/k8s/service.yaml',
                     '/projects/bar-e2e/protractor.conf.js',
                     '/projects/bar-e2e/tsconfig.e2e.json',
                     '/projects/bar-e2e/src/app.e2e-spec.ts',
@@ -131,6 +139,10 @@ describe('ng-universal-k8s', () => {
                 expect(tree.readContent('/projects/bar/server.ts')
                     .indexOf('SIGTERM'))
                     .toBeGreaterThanOrEqual(0);
+                    
+                expect(tree.readContent('/projects/bar/server.ts')
+                    .indexOf('import {createLogger, format, transports} from \'winston\';'))
+                    .toBeGreaterThanOrEqual(0);
 
                 expect(tree.files).toEqual([
                     '/README.md',
@@ -146,7 +158,9 @@ describe('ng-universal-k8s', () => {
                     '/projects/bar/tsconfig.spec.json',
                     '/projects/bar/tslint.json',
                     '/projects/bar/tsconfig.server.json',
+                    '/projects/bar/config.js',
                     '/projects/bar/server.ts',
+                    '/projects/bar/webpack.server.config.js',
                     '/projects/bar/Dockerfile',
                     '/projects/bar/src/favicon.ico',
                     '/projects/bar/src/index.html',
@@ -164,6 +178,8 @@ describe('ng-universal-k8s', () => {
                     '/projects/bar/src/app/app.component.spec.ts',
                     '/projects/bar/src/app/app.component.ts',
                     '/projects/bar/src/app/app.server.module.ts',
+                    '/projects/bar/k8s/deployment.yaml',
+                    '/projects/bar/k8s/service.yaml',
                     '/projects/bar-e2e/protractor.conf.js',
                     '/projects/bar-e2e/tsconfig.e2e.json',
                     '/projects/bar-e2e/src/app.e2e-spec.ts',
@@ -225,6 +241,10 @@ describe('ng-universal-k8s', () => {
                 expect(tree.readContent('/server.ts')
                     .indexOf('SIGTERM'))
                     .toBeGreaterThanOrEqual(0);
+                    
+                expect(tree.readContent('/server.ts')
+                    .indexOf('import {createLogger, format, transports} from \'winston\';'))
+                    .toBeGreaterThanOrEqual(0);
 
                 expect(tree.files).toEqual([
                     '/README.md',
@@ -234,7 +254,9 @@ describe('ng-universal-k8s', () => {
                     '/tslint.json',
                     '/.editorconfig',
                     '/.gitignore',
+                    '/config.js',
                     '/server.ts',
+                    '/webpack.server.config.js',
                     '/Dockerfile',
                     '/src/favicon.ico',
                     '/src/index.html',
@@ -261,7 +283,9 @@ describe('ng-universal-k8s', () => {
                     '/e2e/protractor.conf.js',
                     '/e2e/tsconfig.e2e.json',
                     '/e2e/src/app.e2e-spec.ts',
-                    '/e2e/src/app.po.ts'
+                    '/e2e/src/app.po.ts',
+                    '/k8s/deployment.yaml',
+                    '/k8s/service.yaml'
                 ]);
             });
 
@@ -286,6 +310,10 @@ describe('ng-universal-k8s', () => {
                 expect(tree.readContent('/server.ts')
                     .indexOf('SIGTERM'))
                     .toBeGreaterThanOrEqual(0);
+                    
+                expect(tree.readContent('/server.ts')
+                    .indexOf('import {createLogger, format, transports} from \'winston\';'))
+                    .toBeGreaterThanOrEqual(0);
 
                 expect(tree.files).toEqual([
                     '/README.md',
@@ -295,7 +323,9 @@ describe('ng-universal-k8s', () => {
                     '/tslint.json',
                     '/.editorconfig',
                     '/.gitignore',
+                    '/config.js',
                     '/server.ts',
+                    '/webpack.server.config.js',
                     '/Dockerfile',
                     '/src/favicon.ico',
                     '/src/index.html',
@@ -322,7 +352,9 @@ describe('ng-universal-k8s', () => {
                     '/e2e/protractor.conf.js',
                     '/e2e/tsconfig.e2e.json',
                     '/e2e/src/app.e2e-spec.ts',
-                    '/e2e/src/app.po.ts'
+                    '/e2e/src/app.po.ts',
+                    '/k8s/deployment.yaml',
+                    '/k8s/service.yaml'
                 ]);
             });
 

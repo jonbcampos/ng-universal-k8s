@@ -13,6 +13,12 @@ export interface NodeKeyValue {
     value: string | boolean | number;
 }
 
+export function readValueFromPackageJson(host: Tree, key: string): any {
+    const packageJsonAst = _readJson(host, pkgJsonPath);
+    let node = findPropertyInAstObject(packageJsonAst, key);
+    return node;
+}
+
 export function addScriptIntoPackageJson(host: Tree, script: NodeKeyValue): Tree {
     const packageJsonAst = _readJson(host, pkgJsonPath);
     const scriptsNode = findPropertyInAstObject(packageJsonAst, 'scripts');
@@ -20,17 +26,17 @@ export function addScriptIntoPackageJson(host: Tree, script: NodeKeyValue): Tree
     if (!scriptsNode) {
         // Haven't found the scripts key, add it to the root of the package.json.
         appendPropertyInAstObject(recorder, packageJsonAst, 'scripts', {
-            [script.key]: script.value,
+            [script.key]: script.value.toString(),
         }, 2);
     } else if (scriptsNode.kind === 'object') {
         const scriptNode = findPropertyInAstObject(scriptsNode, script.key);
         if (!scriptNode) {
-            insertPropertyInAstObjectInOrder(recorder, scriptsNode, script.key, JSON.stringify(script.value), 4);
+            insertPropertyInAstObjectInOrder(recorder, scriptsNode, script.key, script.value.toString(), 4);
         } else {
             // found, we need to overwrite
             const {end, start} = scriptNode;
             recorder.remove(start.offset, end.offset - start.offset);
-            recorder.insertRight(start.offset, JSON.stringify(script.value));
+            recorder.insertRight(start.offset, script.value.toString());
         }
     }
     host.commitUpdate(recorder);

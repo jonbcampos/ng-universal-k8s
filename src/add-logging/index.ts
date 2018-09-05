@@ -1,18 +1,12 @@
 import {
-    apply,
     chain,
-    MergeStrategy,
-    mergeWith,
-    move,
     Rule,
     SchematicContext, SchematicsException,
-    template,
-    Tree, url
+    Tree
 } from '@angular-devkit/schematics';
 import {getWorkspace} from '@schematics/angular/utility/config';
-import {join, Path, strings} from '@angular-devkit/core';
+import {join, Path} from '@angular-devkit/core';
 import {addPackageJsonDependency, NodeDependencyType} from "../utils/dependencies";
-import {addScriptIntoPackageJson, readValueFromPackageJson} from "../utils/json-editor";
 import * as ts from 'typescript';
 
 function updateServer(projectRoot:Path){
@@ -31,20 +25,20 @@ function updateServer(projectRoot:Path){
         // TODO add check if it already exists
         const content = '\n' +
             '\n' +
-            'import * as healthCheck from \'express-healthcheck\';\n' +
+            '// create logger\n' +
+            'import {createLogger, format, transports} from \'winston\';\n' +
             '\n' +
-            '// add healthcheck\n' +
-            'app.use(\'/healthcheck\', healthCheck());\n' +
-            '\n' +
-            '// add readiness check\n' +
-            'app.use(\'/readiness\', function (req, res, next) {\n' +
-            '    res.status(200).json({ ready: true });\n' +
-            '});\n' +
-            '\n' +
-            '// respond to termination requests\n' +
-            'process.on(\'SIGTERM\', function () {\n' +
-            '    // TODO: cleanup environment, this is about to be shut down\n' +
-            '    process.exit(0);\n' +
+            '// attach logger\n' +
+            'const logger = createLogger({\n' +
+            '   level: \'info\', // log at info and above\n' +
+            '   format: format.combine(\n' +
+            '       format.timestamp(),\n' +
+            '       format.json()\n' +
+            '   ),\n' +
+            '   transports: [\n' +
+            '       // log to the console\n' +
+            '       new transports.Console()\n' +
+            '   ]\n' +
             '});';
         let found = false;
         nodes.forEach(node => {
@@ -97,40 +91,18 @@ export function findNodes(node: ts.Node, kind: ts.SyntaxKind, max = Infinity): t
     return arr;
 }
 
-function addScriptsToPackageJson(projectName:string) {
-    return (tree: Tree) => {
-        [{
-            key: 'start-prod',
-            value: 'yarn build && cd dist/browser && http-server -c-1'
-        }, {
-            key: 'build:ssr',
-            value: 'yarn run build:client-and-server-bundles && yarn run webpack:server'
-        }, {
-            key: 'serve:ssr',
-            value: 'node dist/server'
-        }, {
-            key: 'webpack:server',
-            value: 'webpack --config webpack.server.config.js --progress --colors'
-        }, {
-            key: 'build:client-and-server-bundles',
-            value: 'ng build --prod && ng run '+projectName+':server'
-        }].forEach(script => addScriptIntoPackageJson(tree, script));
-        return tree;
-    }
-}
-
 function addToPackage() {
     return (tree: Tree) => {
         [{
             type: NodeDependencyType.Default,
-            name: 'express-healthcheck',
-            version: '^0.1.0'
+            name: 'winston',
+            version: '^3.1.0'
         }].forEach(dependency => addPackageJsonDependency(tree, dependency));
         return tree;
     }
 }
 
-export function addK8s(options: any): Rule {
+export function addLogging(options: any): Rule {
     return (tree: Tree, _context: SchematicContext) => {
         const workspace = getWorkspace(tree);
         if (!workspace) {
@@ -144,23 +116,10 @@ export function addK8s(options: any): Rule {
             throw new SchematicsException(`ng-universal-k8s requires a project type of "application".`);
         }
         const projectRoot = project.root as Path;
-        
-        const projectName = readValueFromPackageJson(tree, 'name').value;
-
-        const templateOptions = {
-            ...strings,
-            projectName,
-            ...options,
-        };
 
         const rule = chain([
             addToPackage(),
-            addScriptsToPackageJson(projectName),
-            updateServer(projectRoot),
-            mergeWith(apply(url('./files'), [
-                template(templateOptions),
-                move(projectRoot),
-            ]), MergeStrategy.Default)
+            updateServer(projectRoot)
         ]);
         return rule(tree, _context);
     };

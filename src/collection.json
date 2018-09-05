@@ -14,6 +14,12 @@
       "factory": "./add-k8s/index#addK8s",
       "schema": "./add-k8s/schema.json",
       "private": true
+    },
+    "add-logging": {
+      "description": "A schematic to add logging functionality to Angular Universal if it already exists.",
+      "factory": "./add-logging/index#addLogging",
+      "schema": "./add-logging/schema.json",
+      "private": true
     }
   }
 }

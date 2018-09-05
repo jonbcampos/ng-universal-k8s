@@ -1,30 +1,30 @@
 apiVersion: apps/v1beta1
 kind: Deployment # it is a deployment
 metadata:
-  name: angular-universal-deployment # name of the Deployment
+  name: <%= dasherize(projectName) %>-deployment # name of the Deployment
   labels:
     # any Pods with matching labels are included in this Deployment
-    app: angular-universal
-    tier: angular-universal-tier
+    app: <%= dasherize(projectName) %>
+    tier: <%= dasherize(projectName) %>-tier
 spec:
   # ReplicaSet specification
   replicas: 3 # we are making 3 Pods
   selector:
     matchLabels:
       # ReplicaSet labels will match Pods with the following labels
-      tier: angular-universal-tier
+      tier: <%= dasherize(projectName) %>-tier
   template:
     # Pod template
     metadata:
       labels:
         # Pod's labels
-        app: angular-universal
-        tier: angular-universal-tier
+        app: <%= dasherize(projectName) %>
+        tier: <%= dasherize(projectName) %>-tier
     spec:
       # Pod specification
       containers:
         # the container(s) in this Pod
-        - name: angular-universal-container
+        - name: <%= dasherize(projectName) %>-container
           image: CONTAINER
           # the readiness probe details
           readinessProbe:
@@ -53,4 +53,4 @@ spec:
             - name: NODE_ENV
               value: production
           ports:
-            - containerPort: 4000
+            - containerPort: <%= containerPort %>

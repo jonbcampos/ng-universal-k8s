@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service # a way for the outside world to reach the Pods
 metadata:
   # any Pods with matching labels are included in this Service
-  name: angular-universal-service
+  name: <%= dasherize(projectName) %>-service
 spec:
   # Service ports
   ports:
@@ -13,4 +13,4 @@ spec:
   # It includes a LoadBalancer between Pods
   type: LoadBalancer
   selector:
-    app: angular-universal
+    app: <%= dasherize(projectName) %>
