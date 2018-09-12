@@ -9,9 +9,8 @@ import {
     SchematicContext, SchematicsException, template,
     Tree, url
 } from '@angular-devkit/schematics';
-import {Path} from "@angular-devkit/core";
+import {Path, strings} from "@angular-devkit/core";
 import {getWorkspace} from '@schematics/angular/utility/config';
-import * as strings from "../../node_modules/@angular-devkit/core/src/utils/strings";
 import {addPackageJsonDependency, NodeDependencyType} from "../utils/dependencies";
 import {readValueFromPackageJson} from "../utils/json-editor";
 

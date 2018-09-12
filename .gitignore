@@ -2,6 +2,8 @@
 src/**/*.js
 src/**/*.js.map
 src/**/*.d.ts
+!src/ng-universal-k8s/files/config.js
+!src/ng-universal-k8s/files/webpack.server.config.js
 
 # IDEs
 .idea/
