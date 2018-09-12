@@ -16,7 +16,7 @@ nconf
     });
 
 // check required settings
-checkConfig('GCLOUD_PROJECT');
+checkConfig('PORT');
 
 function checkConfig(setting) {
     if (!nconf.get(setting)) {
