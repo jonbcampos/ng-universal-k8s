@@ -34,8 +34,8 @@ function addToPackage() {
             version: '^6.1.0'
         }, {
             type: NodeDependencyType.Default,
-            name: '@nguniversal/express',
-            version: '^4.15.2'
+            name: '@angular/platform-server',
+            version: '^6.0.3'
         }, {
             type: NodeDependencyType.Default,
             name: '@nguniversal/module-map-ngfactory-loader',
